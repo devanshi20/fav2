@@ -39,6 +39,7 @@ public class FoodDetail extends AppCompatActivity {
 
     String foodId="";
 
+
     FirebaseDatabase database;
     DatabaseReference foods;
     Food currentFood;
@@ -56,6 +57,13 @@ public class FoodDetail extends AppCompatActivity {
         numberButton = (ElegantNumberButton)findViewById(R.id.number_button);
 
         btnCart = (FloatingActionButton)findViewById(R.id.btnCart);
+
+
+        final String f2=currentFood.getName();
+        final String f3=currentFood.getPrice();
+        final String f4=currentFood.getDiscount();
+        final String f5=numberButton.getNumber();
+
         btnCart.setOnClickListener(new View.OnClickListener() {
 
              @Override
@@ -71,6 +79,8 @@ public class FoodDetail extends AppCompatActivity {
 
 
                  d.getAData();
+
+                 d.insert(foodId,f2,f5,f3,f4);
 
 
 

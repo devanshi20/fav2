@@ -10,15 +10,12 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
+import com.example.atul_.eatit.model.Favorites;
 import com.example.atul_.eatit.model.Order;
-import com.google.firebase.database.ValueEventListener;
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.name;
 
 /**
  * Created by atul_ on 31/01/2018.
@@ -60,7 +57,16 @@ public class Database extends SQLiteOpenHelper {
                 "Quantity INTEGER," +
                 "Discount INTEGER);");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS Favorites(FoodId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Favorites(FoodId TEXT NOT NULL,"+
+                "UserPhone TEXT NOT NULL,"+
+                "FoodName TEXT,"+
+                "FoodPrice TEXT,"+
+                "FoodMenuId TEXT,"+
+                "FoodImage TEXT,"+
+                "FoodDescription TEXT,"+
+                "PRIMARY KEY(FoodId,UserPhone));");
+
+
 
 
 
@@ -143,10 +149,20 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public void addToFavorites(String foodId)
+   public void addToFavorites(Favorites food)
     {
         SQLiteDatabase db=getReadableDatabase();
-        String query=String.format("INSERT INTO Favorites(FoodId) VALUES(%s);",foodId);
+        String query;
+        query = String.format("INSERT INTO Favorites(FoodId,FoodName,FoodPrice,FoodMenuId,FoodImage,FoodDiscount,FoodDescription,UserPhone)"+
+                "VALUES(%s,%s,%s,%s,%s,%s,%s,%s);",
+                food.getFoodId(),
+                food.getFoodName(),
+                food.getFoodPrice(),
+                food.getFoodMenuId(),
+                food.getFoodImage(),
+                food.getFoodDiscount(),
+                food.getFoodDescription(),
+                food.getUserPhone());
         db.execSQL(query);
     }
 
@@ -184,13 +200,57 @@ public class Database extends SQLiteOpenHelper {
         return true;
     }
 
+    public List<Favorites>getAllFavorites(String userPhone)
+    {
+
+
+        try{
+            db=SQLiteDatabase.openDatabase("EatIt.db",null,Context.MODE_PRIVATE);
+            // String path ="D:\EatIt.db" + DATABASE_NAME;
+            //  SQLiteDatabase checkDB = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+            //System.out.println(checkDB);
+        } catch(SQLiteException e){
+            System.out.println("Exception");
+        }
+
+
+        //SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect={"UserPhone","FoodId","FoodName","FoodPrice","FoodMenuId","FoodImage","FoodDiscount","FoodDescription"};
+        String sqlTable="Favorites";
+
+
+
+        qb.setTables(sqlTable);
+
+
+        Cursor c = qb.query(db,sqlSelect,"UserPhone=?",null,null,null,null,null);
+
+        final List<Favorites> result = new ArrayList<>();
+        if(c.moveToFirst())
+        {
+            do{
+               result.add(new Favorites(
+                       c.getString(c.getColumnIndex("FoodId")),
+                       c.getString(c.getColumnIndex("FoodName")),
+                       c.getString(c.getColumnIndex("FoodPrice")),
+                       c.getString(c.getColumnIndex("FoodMenuId")),
+                       c.getString(c.getColumnIndex("FoodImage")),
+                       c.getString(c.getColumnIndex("FoodDiscount")),
+                       c.getString(c.getColumnIndex("FoodDescription")),
+                       c.getString(c.getColumnIndex("UserPhone"))
+                       ));
+
+            }while(c.moveToNext());
+        }
+        return result;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
-
-
 
 
 

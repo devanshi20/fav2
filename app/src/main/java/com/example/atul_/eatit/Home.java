@@ -2,8 +2,10 @@ package com.example.atul_.eatit;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -53,6 +55,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
      FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +121,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void loadMenu() {
         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class,R.layout.menu_item,MenuViewHolder.class,category) {
             protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
@@ -140,6 +144,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             public void onBackPressed() {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -164,6 +169,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
            // @SuppressWarnings("StatementWithEmptyBody")
 
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             public boolean onNavigationItemSelected(MenuItem item) {
                 // Handle navigation view item clicks here.
                 int id = item.getItemId();
@@ -177,7 +183,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                      Intent i=new Intent(Home.this,OrderStatus.class);
                      startActivity(i);
 
-                } else if (id == R.id.nav_logout) {
+                }  else if (id == R.id.nav_favorites) {
+                     Intent i=new Intent(Home.this,FavoritesActivity.class);
+                     startActivity(i);
+
+                 }
+                else if (id == R.id.nav_logout) {
 
                      Paper.book().destroy();
 

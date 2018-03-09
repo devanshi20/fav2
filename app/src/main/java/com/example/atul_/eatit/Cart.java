@@ -1,5 +1,7 @@
 package com.example.atul_.eatit;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +36,7 @@ public class Cart extends AppCompatActivity {
 
     CartAdapter adapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -56,6 +59,7 @@ public class Cart extends AppCompatActivity {
         
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void loadListFood() {
    cart= new Database(this).getCarts();
         adapter = new CartAdapter(cart,this);
