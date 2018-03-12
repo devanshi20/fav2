@@ -194,12 +194,13 @@ public class FoodList extends AppCompatActivity {
                         Favorites favorites=new Favorites();
                         favorites.setFoodId(adapter.getRef(position).getKey());
                         favorites.setFoodName(model.getName());
-                        favorites.setFoodDescription(model.getDescription());
-                        favorites.setFoodDiscount(model.getDiscount());
+                        favorites.setFoodPrice(model.getPrice());
                         favorites.setFoodImage(model.getImage());
                         favorites.setFoodMenuId(model.getMenuId());
+                        favorites.setFoodDiscount(model.getDiscount());
+                        favorites.setFoodDescription(model.getDescription());
                         favorites.setUserPhone(Common.currentUser.getPhone());
-                        favorites.setFoodPrice(model.getPrice());
+
 
 
                         if (!localDB.isFavorites(adapter.getRef(position).getKey()))

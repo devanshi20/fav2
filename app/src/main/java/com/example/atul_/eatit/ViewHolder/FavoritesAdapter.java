@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.atul_.eatit.FavoritesActivity;
 import com.example.atul_.eatit.R;
 import com.example.atul_.eatit.model.Favorites;
 import com.example.atul_.eatit.model.Order;
@@ -21,6 +22,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
 
     private Context context;
     private List<Favorites> favoritesList;
+
+    public FavoritesAdapter(FavoritesActivity favoritesActivity, List<Favorites> allFavorites) {
+    }
+
     @Override
     public FavoritesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView= LayoutInflater.from(context)

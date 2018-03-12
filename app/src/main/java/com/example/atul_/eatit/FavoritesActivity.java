@@ -10,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.RelativeLayout;
+import com.example.atul_.eatit.Database.Database;
 
 import com.example.atul_.eatit.Common.Common;
 import com.example.atul_.eatit.ViewHolder.FavoritesAdapter;
@@ -48,7 +49,7 @@ public class FavoritesActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void loadFavorites() {
 
-        //adapter=new FavoritesAdapter(this,new Database(this).getAllFavorites(Common.currentUser.getPhone() );
-        //recyclerView.setAdapter(adapter);
+        adapter=new FavoritesAdapter(this,new Database(this).getAllFavorites(Common.currentUser.getPhone()) );
+        recyclerView.setAdapter(adapter);
     }
 }

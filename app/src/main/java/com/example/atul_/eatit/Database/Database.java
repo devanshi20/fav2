@@ -58,12 +58,13 @@ public class Database extends SQLiteOpenHelper {
                 "Discount INTEGER);");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS Favorites(FoodId TEXT NOT NULL,"+
-                "UserPhone TEXT NOT NULL,"+
                 "FoodName TEXT,"+
                 "FoodPrice TEXT,"+
                 "FoodMenuId TEXT,"+
                 "FoodImage TEXT,"+
+                "FoodDiscount TEXT,"+
                 "FoodDescription TEXT,"+
+                "UserPhone TEXT NOT NULL,"+
                 "PRIMARY KEY(FoodId,UserPhone));");
 
 
