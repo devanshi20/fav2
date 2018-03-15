@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import com.example.atul_.eatit.model.Favorites;
 import com.example.atul_.eatit.model.Order;
@@ -24,10 +25,8 @@ import java.util.List;
 
 
 
-public class Database extends SQLiteOpenHelper {
-
-
-    public static final int DATABASE_VERSION = 1;
+public class Database extends SQLiteOpenHelper{
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "EatIt.db";
 
     public static SQLiteDatabase db;
@@ -200,6 +199,8 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         return true;
     }
+
+
 
     public List<Favorites>getAllFavorites(String userPhone)
     {

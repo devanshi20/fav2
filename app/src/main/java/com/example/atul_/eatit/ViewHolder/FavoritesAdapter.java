@@ -37,7 +37,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     public void onBindViewHolder(FavoritesViewHolder viewHolder, int position) {
 
         viewHolder.food_name.setText(favoritesList.get(position).getFoodName());
-        viewHolder.food_price.setText(String.format("$ %s",favoritesList.get(position).getFoodPrice().toString()));
+        viewHolder.food_price.setText(String.format("$ %s", favoritesList.get(position).getFoodPrice()));
         Picasso.with(context).load(favoritesList.get(position).getFoodImage());
 
     }
